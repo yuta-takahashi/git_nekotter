@@ -1,0 +1,24 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password:
+  socket: /var/run/mysqld/mysqld.sock
+
+development:
+    adapter: mysql2
+    encoding: utf8
+    database: c9
+    username: <%=ENV['C9_USER']%>
+    host: <%=ENV['IP']%>
+
+test:
+  <<: *default
+  database: git_nekotter_test
+
+production:
+  <<: *default
+  database: git_nekotter_production
+  username: git_nekotter
+  password: <%= ENV['GIT_NEKOTTER_DATABASE_PASSWORD'] %>
